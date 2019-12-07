@@ -43,7 +43,7 @@ def gen():
             margin_counts[w] += 1
 
     for w in margin_counts:
-        preds.append("seq(%s,%f)" % (w, margin_counts[w]/total_count))
+        preds.append('seq("%s",%f)' % (w, margin_counts[w]/total_count))
 
     gram_counts = defaultdict(lambda: 0)
 
@@ -57,7 +57,7 @@ def gen():
     for wi in all_words:
         for wj in all_words:
             g = (wi, wj)
-            preds.append("seq(%s,%s,%f)" % (g[0], g[1], gram_counts[g]/margin_counts[g[0]]) )
+            preds.append('seq("%s","%s",%f)' % (g[0], g[1], gram_counts[g]/margin_counts[g[0]]) )
 
 
     return preds
