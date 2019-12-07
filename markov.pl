@@ -52,11 +52,10 @@ m1seq(WSR,P) :-
 % ----------------------------
 
 % lang(W) is true if W is any recognized word in the language
-% example:
-lang(W) :- W = im.
-lang(W) :- W = a.
-lang(W) :- W = tree.
-% TODO: change this in order to reflect our actual language
+% we can use marginal probabilities for this.
+lang(W) :-
+    seq(W,P),
+    P > 0.
 
 % error token to inject into malformed list
 token(error, eRrOr).
