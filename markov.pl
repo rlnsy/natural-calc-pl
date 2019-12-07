@@ -17,19 +17,22 @@
 % example (for testing)
 % sentence = [im,a,tree]
 
-seq(im,1).
-seq(a,1).
-seq(tree,1).
+% seq(im,1).
+% seq(a,1).
+% seq(tree,1).
 
-seq(im,im,0).
-seq(im, a, 1).
-seq(im, tree, 0).
-seq(a,a,0).
-seq(a,im,0).
-seq(a,tree, 1).
-seq(tree,tree,0).
-seq(tree, im, 0).
-seq(tree, a, 0).
+% seq(im,im,0).
+% seq(im, a, 1).
+% seq(im, tree, 0).
+% seq(a,a,0).
+% seq(a,im,0).
+% seq(a,tree, 1).
+% seq(tree,tree,0).
+% seq(tree, im, 0).
+% seq(tree, a, 0).
+
+% LANGUAGE:
+:- [markov_lang_seq].
 
 % Order 1
 % mseq(WS,P) is true if P is the probability P(WS) = P(WS_1 WS_2 ... WS_n)
@@ -137,10 +140,19 @@ pmaxs([S|RS],(RMS,RMP)) :-
     MP =< RMP.
 
 
-% mpcorrect(S,CS) is true if CS is the maximum probability corrected version of
+% correctp(S,(CS,CSP)) is true if CS is the maximum probability corrected version of
 % sentence S with probability CSP
-correct(S,(CS,CSP)) :-
+correctp(S,(CS,CSP)) :-
     scan(S,ES),
     length(S,N),
     sentencesreplace(ES,N,SS),
     pmaxs(SS,(CS,CSP)).
+
+
+% mpcorrect(S,CS) is true if CS is the maximum probability corrected version of
+% sentence S
+correct(S,CS) :-
+    scan(S,ES),
+    length(S,N),
+    sentencesreplace(ES,N,SS),
+    pmaxs(SS,(CS,_)).
