@@ -66,3 +66,13 @@ calc2([H | [/ | T ]], V) :-
     number(H), 
     calc2(T, VT),
     V is H / VT.
+
+:- [markov].
+
+% auto-correct version
+% C represents the corrected sentence
+ccalculate(X, C, Y) :- clangPro(X, C, Z), once(calc2(Z, Y)).
+clangPro(X, C, Y) :- 
+    split_string(X, " ", "", L),
+    correct(L, C),
+    once(equation(C, _, Y)).
