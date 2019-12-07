@@ -133,7 +133,7 @@ pmaxs([],([],0)).
 pmaxs([S|RS],(S,MP)) :-
     pmaxs(RS,(_,RMP)),
     m1seq(S,MP),
-    MP > RMP.
+    MP >= RMP.
 pmaxs([S|RS],(RMS,RMP)) :-
     pmaxs(RS,(RMS,RMP)),
     m1seq(S,MP),
